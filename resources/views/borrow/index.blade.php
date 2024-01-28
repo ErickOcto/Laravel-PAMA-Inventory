@@ -25,6 +25,7 @@ Karyawan
                             <th>Tanggal Pinjam</th>
                             <th>Status</th>
                             <th>No Telp</th>
+                            <th>No Seri</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -39,13 +40,14 @@ Karyawan
                             <th>{{ $borrow->borrow_date }}</th>
                             <th>{{ $borrow->return_date ?? "Dipinjam"}}</th>
                             <th>{{ $borrow->phone }}</th>
+                            <th>{{ $borrow->series }}</th>
                             <th>
                                 <form action="{{ route('updateStatus', $borrow->id) }}" method="POST">
                                     @csrf @method('PUT')
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-info">Update</button>
                                 </form>
 
-                                <a href="{{ route('borrow.edit', $borrow->id) }}">Edit</a>
+                                <a href="{{ route('borrow.edit', $borrow->id) }}" class="btn btn-warning">Edit</a>
                                 <form action="{{ route('borrow.destroy', $borrow->id) }}" onsubmit="return confirm('Apakah anda yakin?')" method="post">
                                     @csrf
                                     @method('DELETE')

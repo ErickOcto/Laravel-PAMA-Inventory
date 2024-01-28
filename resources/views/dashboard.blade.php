@@ -75,6 +75,7 @@ Karyawan
                             <th>Tanggal Pinjam</th>
                             <th>Status</th>
                             <th>No Telp</th>
+                            <th>No Seri</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -89,6 +90,7 @@ Karyawan
                             <th>{{ $borrow->borrow_date }}</th>
                             <th>{{ $borrow->return_date ?? "Dipinjam"}}</th>
                             <th>{{ $borrow->phone }}</th>
+                            <th>{{ $borrow->series }}</th>
                             <th>
                                 <form action="{{ route('borrow.destroy', $borrow->id) }}" onsubmit="return confirm('Apakah anda yakin?')" method="post">
                                     @csrf

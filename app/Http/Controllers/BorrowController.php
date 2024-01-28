@@ -63,9 +63,12 @@ class BorrowController extends Controller
     public function edit(string $id)
     {
         $borrow = Borrow::find($id);
+        $name = User::where('id', $borrow->user_id)->first();
+        $userName = $name->name;
         $users = User::all();
         $items = Item::all();
-        return view('borrow.edit', compact('borrow', 'users', 'items'));
+        //dd($userName);
+        return view('borrow.edit', compact('borrow', 'users', 'items', 'userName'));
     }
 
     /**

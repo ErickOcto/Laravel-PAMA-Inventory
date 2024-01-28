@@ -23,7 +23,7 @@ Buat peminjaman
                                     >Nama Karyawan</label
                                   >
                                   <!-- Elemen input untuk menampilkan nama pengguna -->
-                                  <input type="text" id="userName" value="{{ old('') }}" class="form-control" readonly>
+                                  <input type="text" id="userName" value="{{ old('userName', $userName) }}" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-6">
