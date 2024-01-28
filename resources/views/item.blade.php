@@ -9,7 +9,7 @@ Karyawan
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center ">
                 <h5 class="card-title">
-                    Daftar karyawan
+                    Daftar barang
                 </h5>
             </div>
             <div class="card-body">
@@ -17,18 +17,18 @@ Karyawan
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Karyawan</th>
-                            <th>NRP Karyawan</th>
-                            <th>Departemen</th>
+                            <th>Nama Barang</th>
+                            <th>Kategori Barang</th>
+                            <th>Jumlah dipinjam</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($items as $item)
                         <tr>
                             <th>{{ $loop->iteration }}</th>
-                            <th>{{ $user->name }}</th>
-                            <th>{{ $user->nrp }}</th>
-                            <th>{{ $user->department }}</th>
+                            <th>{{ $item->name }}</th>
+                            <th>{{ $item->category }}</th>
+                            <th>{{ $item->value }}</th>
                         </tr>
                         @endforeach
                     </tbody>

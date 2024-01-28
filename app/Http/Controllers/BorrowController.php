@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Borrow;
+use App\Models\Item;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BorrowController extends Controller
 {
@@ -11,7 +16,15 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        //
+        $borrows = DB::table('borrows')
+        ->leftJoin('users', 'users.id', '=', 'borrows.user_id')
+        ->leftJoin('items', 'items.id', '=', 'borrows.item_id')
+        ->select('borrows.*', 'users.name as user_name', 'items.name as item_name', 'users.nrp as user_nrp', 'items.category as item_category')
+        ->where('borrows.return_date', null)
+        ->get();
+
+        //dd($borrows);
+        return view('borrow.index', compact('borrows'));
     }
 
     /**
@@ -19,7 +32,8 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('borrow.create', compact('users'));
     }
 
     /**
@@ -27,7 +41,10 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $item = Item::where('id', $request->item_id)->first();
+        $item->update(['value' => $item->value + 1]);
     }
 
     /**
@@ -51,7 +68,13 @@ class BorrowController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $borrow = Borrow::find($id);
+        $borrow->update(['return_date' => Carbon::now()]);
+
+        // $item = Item::where('id', $borrow->item_id)->first();
+
+        // $item->update(['value' => $item->value + 1]);
+        return redirect()->back()->with(['success' => "Sukses mengupate data"]);
     }
 
     /**

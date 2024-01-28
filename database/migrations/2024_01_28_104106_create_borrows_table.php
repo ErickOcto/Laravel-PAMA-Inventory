@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
             $table->date('borrow_date');
-            $table->date('return_date');
+            $table->date('return_date')->nullable();
             $table->integer('phone');
+            $table->string('series');
             $table->foreignId('user_id');
             $table->foreignId('item_id');
             $table->timestamps();
