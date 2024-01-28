@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BorrowController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+
+Route::get('employees', [DashboardController::class, 'employees'])->name('employees');
+Route::get('items', [DashboardController::class, 'items'])->name('items');
+Route::resource('borrow', BorrowController::class);
