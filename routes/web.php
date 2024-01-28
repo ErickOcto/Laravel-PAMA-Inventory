@@ -21,4 +21,5 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('employees', [DashboardController::class, 'employees'])->name('employees');
 Route::get('items', [DashboardController::class, 'items'])->name('items');
 Route::resource('borrow', BorrowController::class);
+Route::put('borrow/update/{id}', [BorrowController::class, 'updateStatus'])->name('updateStatus');
 Route::get('/getUserName/{id}', [DashboardController::class, 'getUserName']);

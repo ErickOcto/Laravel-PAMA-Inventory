@@ -11,6 +11,7 @@ Karyawan
                 <h5 class="card-title">
                     Daftar peminjaman
                 </h5>
+                <a href="{{ route('borrow.create') }}" class="btn btn-primary">Tambah Data Pinjaman</a>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-hover" id="table1">
@@ -39,7 +40,7 @@ Karyawan
                             <th>{{ $borrow->return_date ?? "Dipinjam"}}</th>
                             <th>{{ $borrow->phone }}</th>
                             <th>
-                                <form action="{{ route('borrow.update', $borrow->id) }}" method="POST">
+                                <form action="{{ route('updateStatus', $borrow->id) }}" method="POST">
                                     @csrf @method('PUT')
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </form>
@@ -57,6 +58,5 @@ Karyawan
                 </table>
             </div>
         </div>
-
     </section>
 @endsection

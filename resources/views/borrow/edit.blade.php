@@ -8,11 +8,12 @@ Buat peminjaman
     <section class="section">
         <div class="row">
             <div class="col-8">
-                <form class="card" action="{{ route('borrow.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="card" action="{{ route('borrow.update', $borrow->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Form tambah Karyawan</h4>
-                        
+
                     </div>
                     <div class="card-body">
                         <div class="row gy-1">
@@ -22,7 +23,7 @@ Buat peminjaman
                                     >Nama Karyawan</label
                                   >
                                   <!-- Elemen input untuk menampilkan nama pengguna -->
-                                  <input type="text" id="userName" class="form-control" readonly>
+                                  <input type="text" id="userName" value="{{ old('') }}" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -33,7 +34,7 @@ Buat peminjaman
                                     <fieldset class="form-group">
                                         <select id="mySelect2" class="form-select" name="user_id"  required>
                                             @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->nrp }}</option>
+                                            <option value="{{ $user->id }}" {{ $user->id == $borrow->user_id ? 'selected' : '' }}>{{ $user->nrp }}</option>
                                             @endforeach
                                         </select>
                                     </fieldset>
@@ -45,7 +46,7 @@ Buat peminjaman
                                     >No Telp</label
                                   >
                                   <!-- Elemen input untuk menampilkan nama pengguna -->
-                                  <input type="text"  class="form-control" name="phone" required>
+                                  <input type="text"  class="form-control" name="phone" value="{{ old('phone', $borrow->phone) }}" required>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -54,7 +55,7 @@ Buat peminjaman
                                     >No Seri</label
                                   >
                                   <!-- Elemen input untuk menampilkan nama pengguna -->
-                                  <input type="text"  class="form-control" name="series" required>
+                                  <input type="text"  class="form-control" name="series" value="{{ old('series', $borrow->series) }}" required>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -63,7 +64,7 @@ Buat peminjaman
                                     >Tanggal Pinjam</label
                                   >
                                   <!-- Elemen input untuk menampilkan nama pengguna -->
-                                  <input type="date"  class="form-control" name="borrow_date" required>
+                                  <input type="date"  class="form-control" name="borrow_date" value="{{ old('borrow_date', $borrow->borrow_date) }}" required>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -74,7 +75,7 @@ Buat peminjaman
                                     <fieldset class="form-group">
                                         <select id="mySelect2" class="form-select" name="item_id"  required>
                                             @foreach ($items as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" {{ $item->id == $borrow->item_id ? 'selected' : '' }}>{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </fieldset>

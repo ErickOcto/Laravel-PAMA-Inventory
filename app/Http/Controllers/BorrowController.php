@@ -33,7 +33,8 @@ class BorrowController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('borrow.create', compact('users'));
+        $items = Item::all();
+        return view('borrow.create', compact('users', 'items'));
     }
 
     /**
@@ -41,10 +42,11 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        Borrow::create($request->all());
         $item = Item::where('id', $request->item_id)->first();
         $item->update(['value' => $item->value + 1]);
+
+        return redirect()->route('borrow.index');
     }
 
     /**
@@ -60,7 +62,10 @@ class BorrowController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $borrow = Borrow::find($id);
+        $users = User::all();
+        $items = Item::all();
+        return view('borrow.edit', compact('borrow', 'users', 'items'));
     }
 
     /**
@@ -69,11 +74,13 @@ class BorrowController extends Controller
     public function update(Request $request, string $id)
     {
         $borrow = Borrow::find($id);
+        $borrow->update($request->all());
+        return redirect()->route('borrow.index');
+    }
+
+    public function updateStatus($id){
+        $borrow = Borrow::find($id);
         $borrow->update(['return_date' => Carbon::now()]);
-
-        // $item = Item::where('id', $borrow->item_id)->first();
-
-        // $item->update(['value' => $item->value + 1]);
         return redirect()->back()->with(['success' => "Sukses mengupate data"]);
     }
 
@@ -82,6 +89,7 @@ class BorrowController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Borrow::find($id)->delete();
+        return redirect()->back()->with(['success' => "Sukses menghapus data"]);
     }
 }

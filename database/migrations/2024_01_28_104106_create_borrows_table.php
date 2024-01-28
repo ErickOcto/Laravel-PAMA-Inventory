@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('borrow_date');
             $table->date('return_date')->nullable();
-            $table->integer('phone');
+            $table->bigInteger('phone');
             $table->string('series');
             $table->foreignId('user_id');
             $table->foreignId('item_id');
